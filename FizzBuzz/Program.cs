@@ -51,11 +51,22 @@ namespace FizzBuzzy
 
             var p = new Fizzy();
 
-            bool repeat = false;
+            bool repeat = true;
             do
             {
-                Console.WriteLine("enter a value for fizz");
-                p.GetInput();
+                Console.WriteLine("enter a value for fizz, or press enter to exit");
+                p._fizz = p.getStringInput();
+                if (string.IsNullOrWhiteSpace(p._fizz))
+                {
+                    Console.WriteLine("exiting");
+                    repeat = false;
+                    break;
+                }
+                Console.WriteLine("enter a value for buzz");
+                p._buzz = p.getStringInput();
+                Console.WriteLine("enter a value for fizzbuzz");
+                p._fizzbuzz = p.getStringInput();
+                p.GetEntry();
             } while (repeat == true);
 
         }
@@ -157,16 +168,17 @@ namespace FizzBuzzy
             {
                 try
                 {
+                    Console.WriteLine("please enter a number");
                     point = GetEndpoint();
                     error = false;
                 }
                 catch (Exception)
                 {
-                    Console.WriteLine("please enter a number only");
+                    Console.WriteLine("only numbers are allowed");
                     error = true;
                 }
 
-            } while (error == false);
+            } while (error == true);
             return point;
         }
     }
